@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>طاح بورطة — يوتيوب</title>
+<meta name="description" content="القصة كاملة على قناة «طاح بورطة» في يوتيوب. ورطة… وثلاث قرارات… ونجاة.">
+<meta property="og:title" content="طاح بورطة — القصة كاملة على يوتيوب">
+<meta property="og:description" content="قصص نجاة خيالية… والخطر حقيقي. ورطة جديدة كل يوم.">
+<meta property="og:image" content="mark.jpg">
+<meta name="theme-color" content="#121A3E">
+<style>
+  :root { --night:#121A3E; --deep:#070B1F; --orange:#FF7A1A; --sand:#F7E8C8; --dune:#E9B96E; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; }
+  body { background:linear-gradient(180deg,var(--night) 0%,#1A2452 70%,#384B92 100%); color:var(--sand);
+         font-family:-apple-system,"Segoe UI",Tahoma,"Noto Sans Arabic",sans-serif;
+         display:flex; align-items:center; justify-content:center; padding:24px 16px; text-align:center; }
+  main { width:100%; max-width:420px; }
+  .mark { width:120px; height:120px; margin:0 auto 16px; border-radius:24px; display:block; box-shadow:0 8px 22px rgba(0,0,0,.45); }
+  h1 { font-size:36px; font-weight:900; margin:0 0 6px; }
+  .tag { color:var(--dune); font-size:16px; margin:0 0 18px; }
+  p { font-size:17px; line-height:1.7; margin:0 0 22px; }
+  a.btn { display:block; background:var(--orange); color:var(--deep); text-decoration:none; font-weight:900; font-size:21px;
+          padding:18px 16px; border-radius:16px; box-shadow:0 6px 0 #B9520C; }
+  a.btn:active { transform:translateY(3px); box-shadow:0 3px 0 #B9520C; }
+  .help { margin-top:22px; font-size:15px; line-height:1.8; display:none; }
+  .help a { color:var(--orange); }
+  .help b { color:#fff; }
+</style>
+</head>
+<body>
+<main>
+  <img class="mark" src="mark.jpg" alt="" width="120" height="120">
+  <h1>طاح بورطة</h1>
+  <div class="tag">ورطة… وثلاث قرارات… ونجاة</div>
+  <p id="line">القصة كاملة على قناتنا في يوتيوب… ورطة جديدة كل يوم.</p>
+  <a class="btn" id="open" href="https://www.youtube.com/channel/UCVvbOemIYaoWW8DNJKsbxlA?sub_confirmation=1">افتح في تطبيق يوتيوب ▶</a>
+  <div class="help" id="help">
+    ما فتح التطبيق؟ اضغط الزر مرة ثانية.<br>
+    وإذا ما زبط: اضغط <b>⋯</b> فوق، واختر <b>«فتح في المتصفح»</b>.<br>
+    أو <a id="web" href="https://www.youtube.com/channel/UCVvbOemIYaoWW8DNJKsbxlA?sub_confirmation=1">افتح صفحة القناة من هنا</a>.
+  </div>
+</main>
+<script>
+(function () {
+  // One address for the bio. It opens the channel, or one video when the address ends with ?v=<video id>.
+  var CHANNEL_ID = "UCVvbOemIYaoWW8DNJKsbxlA";
+  var v = new URLSearchParams(location.search).get("v");
+  if (!/^[A-Za-z0-9_-]{6,15}$/.test(v || "")) v = null;
+
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  var web = v ? "https://www.youtube.com/watch?v=" + v
+              : "https://www.youtube.com/channel/" + CHANNEL_ID + "?sub_confirmation=1";
+  var path = v ? "www.youtube.com/watch?v=" + v : "www.youtube.com/channel/" + CHANNEL_ID;
+  var app = isAndroid
+    ? "intent://" + path + "#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url=" + encodeURIComponent(web) + ";end"
+    : (isIOS ? "youtube://" + path : web);
+
+  var btn = document.getElementById("open"), help = document.getElementById("help");
+  document.getElementById("web").href = web;
+  btn.href = app;
+  if (v) document.getElementById("line").textContent = "القصة كاملة على قناتنا في يوتيوب… اضغط وكمّلها.";
+
+  function showHelp() { if (!document.hidden) help.style.display = "block"; }
+  btn.addEventListener("click", function () { setTimeout(showHelp, 1800); });
+
+  if (isAndroid || isIOS) {
+    setTimeout(function () { location.href = app; }, 350);
+    setTimeout(showHelp, 2200);
+  } else {
+    location.replace(web);
+  }
+})();
+</script>
+</body>
+</html>
